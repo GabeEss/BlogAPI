@@ -1,13 +1,29 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const session = require("express-session");
+const passport = require("passport");
+const bcrypt = require('bcryptjs');
+const LocalStrategy = require("passport-local").Strategy;
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require("mongoose");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var app = express();
+const app = express();
+
+// Set up mongoose connection
+mongoose.set("strictQuery", false);
+const mongoDB = process.env.MONGODB_URI;
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
