@@ -1,6 +1,10 @@
 const Post = require("../models/post");
 const asyncHandler = require("express-async-handler");
 
+exports.index = asyncHandler(async (req, res, next) => {
+  res.send("HOME");
+});
+
 // Display list of all posts.
 exports.post_list = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: post list");

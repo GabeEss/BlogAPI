@@ -21,6 +21,21 @@ exports.poster_create_post = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: poster create POST");
 });
 
+// Display poster login form on GET.
+exports.poster_login_get = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED: poster login GET");
+});
+
+// Handle poster login on POST.
+exports.poster_login_post = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED: poster login POST");
+});
+
+// Handle poster logout on POST.
+exports.poster_logout_post = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED: poster logout POST");
+});
+
 // Display poster delete form on GET.
 exports.poster_delete_get = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: poster delete GET");
