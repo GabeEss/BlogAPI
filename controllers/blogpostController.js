@@ -15,7 +15,11 @@ exports.index = asyncHandler(async (req, res, next) => {
 
 // Display list of all posts.
 exports.post_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: post list");
+  const allPosts = await Post.find({}, "title text timestamp")
+  .sort({ timestamp: -1 })
+  .exec();
+
+  res.render("post_list", { title: "All Posts", post_list: allPosts, c_user: req.user });
 });
 
 // Display detail page for a specific post.
