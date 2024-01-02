@@ -1,8 +1,16 @@
 const Post = require("../models/post");
+const Comment = require("../models/comment");
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  res.send("HOME");
+  // Get details of posts
+  const latestPost = await Post.findOne().sort({ timestamp: -1 })
+
+  res.render("index", {
+      title: "My Blog",
+      c_user: req.user,
+      latestPost: latestPost
+  });
 });
 
 // Display list of all posts.

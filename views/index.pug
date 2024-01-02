@@ -2,4 +2,11 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  // Display username if a user is logged in
+  if c_user
+    p Welcome, #{c_user.username}!
+    a(href='/user/logout') Logout
+  h2 Check out the latest post!
+  h3=latestPost.title
+  p=latestPost.text
+  p=latestPost.timestamp
