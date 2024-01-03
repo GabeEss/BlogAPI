@@ -1,0 +1,20 @@
+extends layout
+
+block content
+
+    h1 #{post.title}
+    br
+    h5 Post detail: 
+    p #{post.text}
+    br
+    div(style='display:flex;gap:.5rem')
+        p Posted at: #{post.timestamp}
+    h4 Comments
+    if post_comments.length
+      dl
+        each comment in post_comments
+          dt #{comment.text}
+          dd #{comment.owner}
+          dd #{comment.timestamp}
+    else
+      p This post has no comments.

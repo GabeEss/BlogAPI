@@ -24,7 +24,19 @@ exports.post_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific post.
 exports.post_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: post detail: ${req.params.id}`);
+  const post = await Post.findById(req.params.id).exec();
+  const comments = await Comment.find({ post: req.params.id }, "text timestamp owner").exec();
+  if(post === null) {
+    const err = new Error("post not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("post_detail", {
+    post: post,
+    post_comments: comments,
+    c_user: req.user,
+  })
 });
 
 // Display post create form on GET.
