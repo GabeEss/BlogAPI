@@ -36,13 +36,3 @@ exports.comment_delete_get = asyncHandler(async (req, res, next) => {
 exports.comment_delete_post = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: comment delete POST");
 });
-
-// Display comment update form on GET.
-exports.comment_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: comment update GET");
-});
-
-// Handle comment update on POST.
-exports.comment_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: comment update POST");
-});

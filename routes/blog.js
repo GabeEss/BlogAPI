@@ -12,35 +12,14 @@ router.get("/", blogpost_controller.index);
 
 /// POSTER ROUTES ///
 
-// GET request for creating a poster. NOTE This must come before routes that display poster (uses id).
-router.get("/poster/create", blogposter_controller.poster_create_get);
-
-// POST request for creating poster.
-router.post("/poster/create", blogposter_controller.poster_create_post);
-
 // GET request for logging a poster in.
 router.get("/poster/login", blogposter_controller.poster_login_get);
 
 // POST request for logging a poster in.
 router.post("/poster/login", blogposter_controller.poster_login_post);
 
-// POST request for logging a poster out.
-router.post("/poster/logout", blogposter_controller.poster_logout_post);
-
-// GET request to delete poster.
-router.get("/poster/:id/delete", blogposter_controller.poster_delete_get);
-
-// POST request to delete poster.
-router.post("/poster/:id/delete", blogposter_controller.poster_delete_post);
-
-// GET request to update poster.
-router.get("/poster/:id/update", blogposter_controller.poster_update_get);
-
-// POST request to update poster.
-router.post("/poster/:id/update", blogposter_controller.poster_update_post);
-
-// GET request for one poster.
-router.get("/poster/:id", blogposter_controller.poster_detail);
+// GET request for logging a poster out.
+router.get("/poster/logout", blogposter_controller.poster_logout_get);
 
 /// POST ROUTES ///
 
@@ -81,12 +60,6 @@ router.get("/comment/:id/delete", blogcomment_controller.comment_delete_get);
 
 // POST request to delete comment.
 router.post("/comment/:id/delete", blogcomment_controller.comment_delete_post);
-
-// GET request to update comment.
-router.get("/comment/:id/update", blogcomment_controller.comment_update_get);
-
-// POST request to update comment.
-router.post("/comment/:id/update", blogcomment_controller.comment_update_post);
 
 // GET request for one comment.
 router.get("/comment/:id", blogcomment_controller.comment_detail);

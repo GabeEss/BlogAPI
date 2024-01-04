@@ -5,7 +5,6 @@ block content
   // Display username if a user is logged in
   if c_user
     p Welcome, #{c_user.username}!
-    a(href='/user/logout') Logout
   h2 Check out the latest post!
   h3
     a(href=latestPost.url) #{latestPost.title}
