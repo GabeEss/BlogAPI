@@ -1,11 +1,6 @@
 const Poster = require("../models/poster");
 const asyncHandler = require("express-async-handler");
 
-// Display list of all posters.
-exports.poster_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: poster list");
-});
-
 // Display detail page for a specific poster.
 exports.poster_detail = asyncHandler(async (req, res, next) => {
   res.send(`NOT IMPLEMENTED: poster detail: ${req.params.id}`);

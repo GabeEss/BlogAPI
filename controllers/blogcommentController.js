@@ -1,14 +1,20 @@
 const Comment = require("../models/comment");
 const asyncHandler = require("express-async-handler");
 
-// Display list of all comments.
-exports.comment_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: comment list");
-});
-
 // Display detail page for a specific comment.
 exports.comment_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: comment detail: ${req.params.id}`);
+  const comment = await Comment.findById(req.params.id);
+
+  if(comment === null) {
+    const err = new Error("comment not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("comment_detail", {
+    comment: comment,
+    c_user: req.user
+  })
 });
 
 // Display comment create form on GET.

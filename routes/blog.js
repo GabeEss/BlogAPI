@@ -42,9 +42,6 @@ router.post("/poster/:id/update", blogposter_controller.poster_update_post);
 // GET request for one poster.
 router.get("/poster/:id", blogposter_controller.poster_detail);
 
-// GET request for list of all poster items.
-router.get("/posters", blogposter_controller.poster_list);
-
 /// POST ROUTES ///
 
 // GET request for creating post. NOTE This must come before route for id (i.e. display post).
@@ -93,8 +90,5 @@ router.post("/comment/:id/update", blogcomment_controller.comment_update_post);
 
 // GET request for one comment.
 router.get("/comment/:id", blogcomment_controller.comment_detail);
-
-// GET request for list of all comments.
-router.get("/comments", blogcomment_controller.comment_list);
 
 module.exports = router;

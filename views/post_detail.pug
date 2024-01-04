@@ -13,7 +13,8 @@ block content
     if post_comments.length
       dl
         each comment in post_comments
-          dt #{comment.text}
+          a(href=comment.url)
+            dt #{comment.text}
           dd #{comment.owner}
           dd #{comment.timestamp}
     else

@@ -22,6 +22,12 @@ const CommentSchema = new Schema({
   }
 });
 
+// Virtual for comment's URL
+CommentSchema.virtual("url").get(function () {
+  // We don't use an arrow function as we'll need the this object
+  return `/blog/comment/${this._id}`;
+});
+
 CommentSchema.virtual("timestamp_formatted").get(function () {
   return DateTime.fromJSDate(this.timestamp).toLocaleString(DateTime.DATE_MED);
 });

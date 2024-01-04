@@ -7,6 +7,7 @@ block content
     p Welcome, #{c_user.username}!
     a(href='/user/logout') Logout
   h2 Check out the latest post!
-  h3=latestPost.title
+  h3
+    a(href=latestPost.url) #{latestPost.title}
   p=latestPost.text
   p=latestPost.timestamp
