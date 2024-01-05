@@ -17,5 +17,10 @@ block content
             dt #{comment.text}
           dd #{comment.owner}
           dd #{comment.timestamp}
+    if c_user
+        p
+            a(href=post.url+'/delete') Delete Post
+        p
+            a(href=post.url+'/update') Update Post
     else
       p This post has no comments.
