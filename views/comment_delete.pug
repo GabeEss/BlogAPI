@@ -3,14 +3,15 @@ extends layout
 block content
 
     if c_user
-        h1 #{title}: #{comment.text}
+        h1 #{title}
 
         h3 Do you really want to delete this comment?
+        p #{comment.text}
 
-            form(method='POST' action='')
-              div.form-group
-                input#commentid.form-control(type='hidden',name='commentid', required='true', value=comment._id )
+        form(method='POST' action='')
+            div.form-group
+            input#commentid.form-control(type='hidden',name='commentid', required='true', value=comment._id )
 
-              button.btn.btn-primary(type='submit') Delete
+            button.btn.btn-primary(type='submit') Delete
     else
         p You shouldn't be here.
