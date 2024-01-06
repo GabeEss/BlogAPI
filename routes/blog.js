@@ -50,10 +50,10 @@ router.get("/posts", blogpost_controller.post_list);
 /// COMMENT ROUTES ///
 
 // GET request for creating comment. NOTE This must come before route for id (i.e. display comment).
-router.get("/comment/create", blogcomment_controller.comment_create_get);
+router.get("/post/:id/create", blogcomment_controller.comment_create_get);
 
 // POST request for creating comment.
-router.post("/comment/create", blogcomment_controller.comment_create_post);
+router.post("/post/:id/create", blogcomment_controller.comment_create_post);
 
 // GET request to delete comment.
 router.get("/comment/:id/delete", blogcomment_controller.comment_delete_get);

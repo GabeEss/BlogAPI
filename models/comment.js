@@ -13,7 +13,7 @@ const CommentSchema = new Schema({
   owner: { 
     type: String,
     required: true,
-    maxLength: 150
+    maxLength: 50
   },
   post: {
     type: Schema.Types.ObjectId,

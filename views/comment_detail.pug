@@ -8,3 +8,6 @@ block content
     div(style='display:flex;gap:.5rem')
         p #{comment.owner}
             p commented at: #{comment.timestamp}
+    if c_user
+        p
+            a(href=comment.url+'/delete') Delete Comment

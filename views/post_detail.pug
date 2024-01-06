@@ -4,12 +4,13 @@ block content
 
     h1 #{post.title}
     br
-    h5 Post detail: 
+    h4 Post detail: 
     p #{post.text}
     br
     div(style='display:flex;gap:.5rem')
         p Posted at: #{post.timestamp}
-    h4 Comments
+    a(href=post.url+`/create`) Write a comment
+    h5 Comments
     if post_comments.length
       dl
         each comment in post_comments
@@ -17,10 +18,10 @@ block content
             dt #{comment.text}
           dd #{comment.owner}
           dd #{comment.timestamp}
+    else
+      p This post has no comments.
     if c_user
         p
             a(href=post.url+'/delete') Delete Post
         p
             a(href=post.url+'/update') Update Post
-    else
-      p This post has no comments.
