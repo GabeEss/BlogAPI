@@ -13,7 +13,7 @@ exports.comment_detail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render("comment_detail", {
+  res.json("comment_detail", {
     comment: comment,
     c_user: req.user
   })
@@ -22,7 +22,7 @@ exports.comment_detail = asyncHandler(async (req, res, next) => {
 // Display comment create form on GET.
 exports.comment_create_get = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id).exec();
-  res.render("comment_form", {title: "Create Comment", c_user: req.user, post: post});
+  res.json("comment_form", {title: "Create Comment", c_user: req.user, post: post});
 });
 
 // Handle comment create on POST.
@@ -42,7 +42,7 @@ exports.comment_create_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      res.render("comment_form", {title: "Create Comment", c_user: req.user, errors: errors.array(), message: req.body })
+      res.json("comment_form", {title: "Create Comment", c_user: req.user, errors: errors.array(), message: req.body })
       return;
     }
 
@@ -70,7 +70,7 @@ exports.comment_delete_get = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render("comment_delete", {
+  res.json("comment_delete", {
     title: "Delete Comment",
     c_user: req.user,
     comment: comment,

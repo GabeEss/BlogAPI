@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const asyncHandler = require("express-async-handler");
 
 // Require controller modules.
 const blogposter_controller = require("../controllers/blogposterController");

@@ -7,7 +7,7 @@ exports.index = asyncHandler(async (req, res, next) => {
   // Get details of posts
   const latestPost = await Post.findOne().sort({ timestamp: -1 })
 
-  res.render("index", {
+  res.json("index", {
       title: "My Blog",
       c_user: req.user,
       latestPost: latestPost
@@ -20,7 +20,7 @@ exports.post_list = asyncHandler(async (req, res, next) => {
   .sort({ timestamp: -1 })
   .exec();
 
-  res.render("post_list", { title: "All Posts", post_list: allPosts, c_user: req.user });
+  res.json("post_list", { title: "All Posts", post_list: allPosts, c_user: req.user });
 });
 
 // Display detail page for a specific post.
@@ -33,7 +33,7 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render("post_detail", {
+  res.json("post_detail", {
     post: post,
     post_comments: comments,
     c_user: req.user,
@@ -42,7 +42,7 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
 
 // Display post create form on GET.
 exports.post_create_get = asyncHandler(async (req, res, next) => {
-  res.render("post_form", { title: "Create Post", c_user: req.user });
+  res.json("post_form", { title: "Create Post", c_user: req.user });
 });
 
 // Handle post create on POST.
@@ -62,7 +62,7 @@ exports.post_create_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      res.render("post_form", { title: "Create Post", c_user: req.user, errors: errors.array(), message: req.body })
+      res.json("post_form", { title: "Create Post", c_user: req.user, errors: errors.array(), message: req.body })
       return;
     }
 
@@ -87,7 +87,7 @@ exports.post_delete_get = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render("post_delete", {
+  res.json("post_delete", {
     title: "Delete Post",
     c_user: req.user,
     post: post
@@ -123,7 +123,7 @@ exports.post_update_get = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render("post_form", {
+  res.json("post_form", {
     title: "Update Form",
     c_user: req.user,
     post: post,
@@ -147,7 +147,7 @@ exports.post_update_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      res.render("post_form", { title: "Create Post", c_user: req.user, errors: errors.array(), message: req.body })
+      res.json("post_form", { title: "Create Post", c_user: req.user, errors: errors.array(), message: req.body })
       return;
     }
 
@@ -166,7 +166,7 @@ exports.post_update_post = [
         _id: req.params.id,
     })
     if(!errors.isEmpty()) {
-      res.render("post_form", {
+      res.json("post_form", {
         title: "Update Form",
         post: post,
         c_user: req.user,

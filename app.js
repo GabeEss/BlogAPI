@@ -2,6 +2,8 @@ require('dotenv').config();
 const Poster = require('./models/poster');
 var createError = require('http-errors');
 var express = require('express');
+var cors = require('cors')
+const jwt = require('jsonwebtoken');
 var path = require('path');
 const session = require("express-session");
 const passport = require("passport");
@@ -26,10 +28,13 @@ async function main() {
 }
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'pug');
 
 const sessionSecret = process.env.SESSION_SECRET;
+
+// Currently enabled for all routes and origins.
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -77,6 +82,9 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve the React app
+// app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
 app.use('/', indexRouter);
 app.use("/blog", blogRouter);
