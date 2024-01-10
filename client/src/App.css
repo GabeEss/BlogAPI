@@ -1,0 +1,15 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content {
+    display: flex;
+    flex: 1;
+  }
+  
+  /* Add this if you haven't defined styles for these components */
+  header, .sidebar, .main {
+    padding: 1em;
+  }

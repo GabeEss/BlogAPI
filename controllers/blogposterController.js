@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 // Display poster login form on GET.
 exports.poster_login_get = asyncHandler(async (req, res, next) => {
-  res.json("poster_login", { title: "Blog Poster Login", c_user: req.user })
+  res.json({ title: "Blog Poster Login", c_user: req.user })
 });
 
 // Handle poster login on POST.
@@ -15,7 +15,7 @@ exports.poster_login_post = asyncHandler(async (req, res, next) => {
     if (!user) {
       // Authentication failed
       const errorMessage = 'Incorrect username or password';
-      return res.json('poster_login', { title: 'Blog Poster Login', c_user: req.user, errorMessage: errorMessage });
+      return res.json({ title: 'Blog Poster Login', c_user: req.user, errorMessage: errorMessage });
     }
     // Authentication successful, log in the user
     req.logIn(user, (loginErr) => {
