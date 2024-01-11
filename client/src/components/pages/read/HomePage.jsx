@@ -5,11 +5,9 @@ function HomePage() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    // Replace '/api/index' with the actual path to your endpoint
     axios.get('/blog')
       .then(response => { 
         setData(response.data);
-        console.log(response.data);
     })
       .catch(error => console.error(error));
   }, []);

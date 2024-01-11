@@ -89,7 +89,7 @@ app.use(express.static(path.join(__dirname, 'client', 'dist')));
 app.use('/', indexRouter);
 app.use("/blog", blogRouter);
 
-// Add this before the catch-all route
+// Add this before the catch-all route to validate user.
 app.get('/blog/user', (req, res) => {
   if (req.user) {
     res.json({ user: req.user });
