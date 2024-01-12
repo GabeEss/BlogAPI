@@ -17,12 +17,15 @@ function PostListPage() {
         <div>
         <h1>{data.title}</h1>
         {data.c_user && <p>User: {data.c_user}</p>}
-        {data.post_list && data.post_list.map ((post, index) => (
-            <div key={index}>
-                <h2><Link to={`/blog/post/${post._id}`}>{post.title}</Link></h2>
-                <p>{post.text}</p>
-            </div>
-        ))}
+        {data.post_list ? (
+            data.post_list.map ((post, index) => (
+                <div key={index}>
+                    <h2><Link to={`/blog/post/${post._id}`}>{post.title}</Link></h2>
+                    <p>{post.text}</p>
+                </div>
+            ))) : (
+            <p>No posts available.</p>
+        )}
         </div>
     );
 }

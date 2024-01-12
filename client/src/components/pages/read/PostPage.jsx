@@ -23,14 +23,20 @@ function PostPage() {
                     <h2>{data.post.title}</h2>
                     <p>{data.post.text}</p>
                     <div>
-                        <h3>Comments</h3>
-                        {data.post_comments && data.post_comments.map((comment, index) => (
-                            <div key={index}>
-                                <p><Link to={`/blog/comment/${comment._id}`}>{comment.text}</Link></p>
-                                <p>Written by: {comment.owner}</p>
-                                <p>Created at: {comment.timestamp}</p>
-                            </div>
-                        ))}
+                        {data.post_comments && data.post_comments.length > 0 ? (
+                            <>
+                                <h3>Comments</h3>
+                                {data.post_comments.map((comment, index) => (
+                                    <div key={index}>
+                                        <p><Link to={`/blog/comment/${comment._id}`}>{comment.text}</Link></p>
+                                        <p>Written by: {comment.owner}</p>
+                                        <p>Created at: {comment.timestamp}</p>
+                                    </div>
+                                ))}
+                            </>
+                        ) : (
+                            <p>No comments available.</p>
+                        )}
                     </div>
                 </div>
             )}

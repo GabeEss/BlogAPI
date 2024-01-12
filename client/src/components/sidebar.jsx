@@ -1,6 +1,15 @@
+import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 function Sidebar() {
+  const [data, setData] = useState({});
+  
+  useEffect(() => {
+    fetch("/blog")
+      .then(response => response.json())
+      .then(data => setData(data));
+  }, []);
+
   return (
     <div className="sidebar">
       <ul>

@@ -16,11 +16,13 @@ function HomePage() {
     <div>
       <h1>{data.title}</h1>
       {data.c_user && <p>User: {data.c_user}</p>}
-      {data.latestPost && (
+      {data.latestPost ? (
         <div>
           <h2>{data.latestPost.title}</h2>
           <p>{data.latestPost.text}</p>
         </div>
+      ) : (
+        <p>No latest post available.</p>
       )}
     </div>
   );
