@@ -19,7 +19,7 @@ function PostListPage() {
         {data.c_user && <p>User: {data.c_user}</p>}
         {data.post_list && data.post_list.map ((post, index) => (
             <div key={index}>
-                <h2><Link to={post.url}>{post.title}</Link></h2>
+                <h2><Link to={`/blog/post/${post._id}`}>{post.title}</Link></h2>
                 <p>{post.text}</p>
             </div>
         ))}
