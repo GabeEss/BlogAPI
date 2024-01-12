@@ -17,7 +17,6 @@ function PostPage() {
     return (
         <div>
             <h1>{data.title}</h1>
-            {data.c_user && <p>User: {data.c_user}</p>}
             {data.post && (
                 <div>
                     <h2>{data.post.title}</h2>

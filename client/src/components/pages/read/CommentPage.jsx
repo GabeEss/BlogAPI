@@ -16,7 +16,6 @@ function CommentPage() {
 
     return (
         <div>
-            {data.c_user && <p>User: {data.c_user}</p>}
             {data.comment && (
             <div>
                 <h4>{data.comment.text}</h4>

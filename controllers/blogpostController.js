@@ -9,7 +9,6 @@ exports.index = asyncHandler(async (req, res, next) => {
 
   res.json({
       title: "My Blog",
-      c_user: req.user,
       latestPost: latestPost
   });
 });
@@ -20,7 +19,7 @@ exports.post_list = asyncHandler(async (req, res, next) => {
   .sort({ timestamp: -1 })
   .exec();
 
-  res.json({ title: "All Posts", post_list: allPosts, c_user: req.user });
+  res.json({ title: "All Posts", post_list: allPosts});
 });
 
 // Display detail page for a specific post.
@@ -36,13 +35,12 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
   res.json({
     post: post,
     post_comments: comments,
-    c_user: req.user,
   })
 });
 
 // Display post create form on GET.
 exports.post_create_get = asyncHandler(async (req, res, next) => {
-  res.json({ title: "Create Post", c_user: req.user });
+  res.json({ title: "Create Post",});
 });
 
 // Handle post create on POST.
@@ -62,7 +60,7 @@ exports.post_create_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      res.json({ title: "Create Post", c_user: req.user, errors: errors.array(), message: req.body })
+      res.json({ title: "Create Post", errors: errors.array(), message: req.body })
       return;
     }
 
@@ -89,7 +87,6 @@ exports.post_delete_get = asyncHandler(async (req, res, next) => {
 
   res.json({
     title: "Delete Post",
-    c_user: req.user,
     post: post
   })
 });
@@ -125,7 +122,6 @@ exports.post_update_get = asyncHandler(async (req, res, next) => {
 
   res.json({
     title: "Update Form",
-    c_user: req.user,
     post: post,
   })
 });
@@ -147,7 +143,7 @@ exports.post_update_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      res.json({ title: "Create Post", c_user: req.user, errors: errors.array(), message: req.body })
+      res.json({ title: "Create Post", errors: errors.array(), message: req.body })
       return;
     }
 
@@ -169,7 +165,6 @@ exports.post_update_post = [
       res.json({
         title: "Update Form",
         post: post,
-        c_user: req.user,
         errors: errors.array(),
       })
       return;

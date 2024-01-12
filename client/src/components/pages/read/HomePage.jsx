@@ -15,7 +15,6 @@ function HomePage() {
   return (
     <div>
       <h1>{data.title}</h1>
-      {data.c_user && <p>User: {data.c_user}</p>}
       {data.latestPost ? (
         <div>
           <h2>{data.latestPost.title}</h2>

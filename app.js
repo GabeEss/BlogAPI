@@ -27,10 +27,6 @@ async function main() {
   await mongoose.connect(mongoDB);
 }
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'pug');
-
 const sessionSecret = process.env.SESSION_SECRET;
 
 // Currently enabled for all routes and origins.

@@ -5,8 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173, // set your desired port here
-    open: true, // opens the browser
+    port: 5000,
+    open: true,
     proxy: {
       '/blog': 'http://localhost:3000',
     },

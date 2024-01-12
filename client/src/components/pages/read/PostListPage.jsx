@@ -16,7 +16,6 @@ function PostListPage() {
     return (
         <div>
         <h1>{data.title}</h1>
-        {data.c_user && <p>User: {data.c_user}</p>}
         {data.post_list ? (
             data.post_list.map ((post, index) => (
                 <div key={index}>
