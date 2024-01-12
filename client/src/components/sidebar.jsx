@@ -3,12 +3,18 @@ import { useContext } from 'react';
 import { AuthContext } from '../contexts/LoginContext';
 
 function Sidebar() {
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn, logout } = useContext(AuthContext);
+
+  function handleLogout(event) {
+    event.preventDefault();
+    logout();
+  }
+
     return (
       <div className="sidebar">
         <ul>
           {loggedIn ? (
-            <li>Hello, blogger. Log out forthcoming.</li>
+            <li><button onClick={handleLogout}>Logout</button></li>
           ) : <li><Link to="/blog/poster/login">Login</Link></li> } 
           <li><Link to="/blog">Home</Link></li>
           <li><Link to="/blog/posts">Posts</Link></li>

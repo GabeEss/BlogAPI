@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const response = await axios.post('/blog/poster/logout');
+      const response = await axios.get('/blog/poster/logout');
       if (response.data.success) {
         setLoggedIn(false);
       } else {

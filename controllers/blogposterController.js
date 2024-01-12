@@ -35,6 +35,6 @@ exports.poster_logout_get = asyncHandler(async (req, res, next) => {
     if (err) {
         return next(err);
     }
-    res.redirect("/");
+    return res.json({success: true});
   });
 });
