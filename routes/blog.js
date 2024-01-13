@@ -22,9 +22,6 @@ router.get("/poster/logout", blogposter_controller.poster_logout_get);
 
 /// POST ROUTES ///
 
-// GET request for creating post. NOTE This must come before route for id (i.e. display post).
-router.get("/post/create", blogpost_controller.post_create_get);
-
 // POST request for creating post.
 router.post("/post/create", blogpost_controller.post_create_post);
 

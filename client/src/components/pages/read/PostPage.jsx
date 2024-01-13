@@ -21,6 +21,7 @@ function PostPage() {
                 <div>
                     <h2>{data.post.title}</h2>
                     <p>{data.post.text}</p>
+                    <p>Written at: {data.post.timestamp}</p>
                     <div>
                         {data.post_comments && data.post_comments.length > 0 ? (
                             <>

@@ -19,6 +19,7 @@ function HomePage() {
         <div>
           <h2>{data.latestPost.title}</h2>
           <p>{data.latestPost.text}</p>
+          <p>Written at: {data.latestPost.timestamp}</p>
         </div>
       ) : (
         <p>No latest post available.</p>

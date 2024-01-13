@@ -38,11 +38,6 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
   })
 });
 
-// Display post create form on GET.
-exports.post_create_get = asyncHandler(async (req, res, next) => {
-  res.json({ title: "Create Post",});
-});
-
 // Handle post create on POST.
 exports.post_create_post = [
   // Validate and sanitize the username field.
@@ -53,15 +48,14 @@ exports.post_create_post = [
   .withMessage("Title must be between 3-25 characters."),
   body("text")
   .trim()
-  .isLength({ min: 20, max: 200 })
+  .isLength({ min: 6, max: 200 })
   .escape()
-  .withMessage("Post must be between 20-200 characters."),
+  .withMessage("Post must be between 6-200 characters."),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      res.json({ title: "Create Post", errors: errors.array(), message: req.body })
-      return;
+      return res.status(400).json({ success: "false", errors: errors.array() });      
     }
 
     const post = new Post({
@@ -70,8 +64,8 @@ exports.post_create_post = [
         timestamp: new Date(),
     })
 
-    await post.save();
-    res.redirect(post.url);
+    const savedPost = await post.save();
+    return res.status(201).json({ success: "true", post: savedPost });
   })
 ]
 
