@@ -37,6 +37,7 @@ function PostPage() {
                         ) : (
                             <p>No comments available.</p>
                         )}
+                        <p><Link to={`/blog/post/${id}/create`}>Post a comment...</Link></p>
                     </div>
                 </div>
             )}

@@ -18,12 +18,6 @@ exports.comment_detail = asyncHandler(async (req, res, next) => {
   })
 });
 
-// Display comment create form on GET.
-exports.comment_create_get = asyncHandler(async (req, res, next) => {
-  const post = await Post.findById(req.params.id).exec();
-  res.json({title: "Create Comment", post: post});
-});
-
 // Handle comment create on POST.
 exports.comment_create_post = [ 
   // Validate and sanitize form.
@@ -41,8 +35,7 @@ exports.comment_create_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      res.json({title: "Create Comment", errors: errors.array(), message: req.body })
-      return;
+      return res.status(400).json({ success: "false", errors: errors.array() });      
     }
 
     const post = await Post.findById(req.params.id).exec();
@@ -55,7 +48,7 @@ exports.comment_create_post = [
     })
 
     await comment.save();
-    res.redirect(post.url);
+    return res.status(201).json( { success: "true", comment: comment } );
   })
 ]
 

@@ -32,21 +32,21 @@ function NewPostPage() {
             <h1>New Post</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                <label htmlFor="title">Title</label>
-                <input
-                    type="text"
-                    id="title"
-                    value={title}
-                    onChange={event => setTitle(event.target.value)}
-                />
+                    <label htmlFor="title">Title</label>
+                    <input
+                        type="text"
+                        id="title"
+                        value={title}
+                        onChange={event => setTitle(event.target.value)}
+                    />
                 </div>
                 <div>
-                <label htmlFor="text">Text</label>
-                <textarea
-                    id="text"
-                    value={text}
-                    onChange={event => setText(event.target.value)}
-                />
+                    <label htmlFor="text">Text</label>
+                    <textarea
+                        id="text"
+                        value={text}
+                        onChange={event => setText(event.target.value)}
+                    />
                 </div>
                 <button type="submit">Submit</button>
             </form>
