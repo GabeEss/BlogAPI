@@ -78,6 +78,7 @@ exports.post_create_post = [
 // Handle post delete on POST.
 exports.post_delete_post = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id).exec();
+  const comments = await Comment.find({ post: req.params.id }, "text timestamp owner").exec();
 
   if(!req.user) {
     res.status(403).send("Unauthorized");
@@ -88,9 +89,13 @@ exports.post_delete_post = asyncHandler(async (req, res, next) => {
     const err = new Error("Post not found.");
     err.status = 404;
     return next(err);
+  }
+
+  if(comments.length > 0) {
+    return res.json({success: false});
   } else {
-    await Post.findByIdAndDelete(req.body.postid);
-    res.redirect("/");
+    await Post.findByIdAndDelete(req.params.id);
+    return res.json({success: true});
   }
 });
 
