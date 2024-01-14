@@ -8,7 +8,7 @@ export default defineConfig({
     port: 5000,
     open: true,
     proxy: {
-      '/blog': 'http://localhost:3000',
+      '/blog': import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000',
     },
   },
 })
