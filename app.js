@@ -24,7 +24,14 @@ const mongoDB = process.env.MONGODB_URI;
 
 main().catch((err) => console.log(err));
 async function main() {
-  await mongoose.connect(mongoDB);
+  await mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+
+  const db = mongoose.connection;
+
+  db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+  db.once('open', function() {
+    console.log("MongoDB database connection established successfully");
+  });
 }
 
 const sessionSecret = process.env.SESSION_SECRET;
@@ -77,7 +84,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve the React app
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
@@ -112,7 +118,11 @@ app.use(function(err, req, res, next) {
 
   // send the error message
   res.status(err.status || 500);
-  res.send('error');
+  if (req.app.get('env') === 'development') {
+    res.send({ message: err.message, error: err });
+  } else {
+    res.send({ message: err.message });
+  }
 });
 
 module.exports = app;
