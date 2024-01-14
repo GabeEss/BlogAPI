@@ -46,8 +46,8 @@ function PostPage() {
             <div>
                 {loggedIn ? (
                     <div>
-                        <p><Link to={`/blog/post/${id}/update`}>Update this post...</Link></p>
-                        <p><Link to={`/blog/post/${id}/delete`}>Delete this post...</Link></p>
+                        <button><Link to={`/blog/post/${id}/update`}>Update this post...</Link></button>
+                        <button><Link to={`/blog/post/${id}/delete`}>Delete this post...</Link></button>
                     </div>
                 ) : (
                     <></>

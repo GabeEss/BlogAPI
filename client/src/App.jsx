@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/sidebar';
-import Header from './components/header';
 import MainDisplay from './components/main';
 import HomePage from './components/pages/read/HomePage';
 import PostListPage from './components/pages/read/PostListPage';
@@ -14,7 +13,7 @@ import NewPostPage from './components/pages/create/NewPostPage';
 import NewCommentPage from './components/pages/create/NewCommentPage';
 import EditPostPage from './components/pages/update/EditPostPage';
 import DeletePostPage from './components/pages/delete/DeletePostPage';
-// import DeleteCommentPage from './components/pages/delete/DeleteCommentPage';
+import DeleteCommentPage from './components/pages/delete/DeleteCommentPage';
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
       <ErrorProvider>
         <AuthProvider>
           <div className="App">
-            <Header />
             <div className="content">
               <Sidebar />
               <MainDisplay>
@@ -37,7 +35,7 @@ function App() {
                   <Route path="/blog/post/:id/create" element={<NewCommentPage />} />
                   <Route path="/blog/post/:id/update" element={<EditPostPage />} />
                   <Route path="/blog/post/:id/delete" element={<DeletePostPage />} />
-                  {/* <Route path="/blog/comment/:id/delete" element={<DeleteCommentPage />} /> */}
+                  <Route path="/blog/comment/:id/delete" element={<DeleteCommentPage />} />
                 </Routes>
               </MainDisplay>
             </div>

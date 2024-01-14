@@ -1,10 +1,12 @@
-import {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useState, useEffect, useContext} from 'react';
+import {useParams, Link} from 'react-router-dom';
+import { AuthContext } from '../../../contexts/LoginContext';
 import axios from 'axios';
 
 function CommentPage() {
     const [data, setData] = useState({});
     const {id} = useParams();
+    const { loggedIn } = useContext(AuthContext);
 
     useEffect(() => {
         axios.get(`/blog/comment/${id}`)
@@ -23,6 +25,15 @@ function CommentPage() {
                 <p>Created at: {data.comment.timestamp}</p>
             </div>
             )}
+            <div>
+                {loggedIn ? (
+                    <div>
+                        <button><Link to={`/blog/comment/${id}/delete`}>Delete this comment...</Link></button>
+                    </div>
+                ) : (
+                    <></>
+                )}
+            </div>
         </div>
     )
 }

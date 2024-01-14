@@ -5,7 +5,7 @@ const { body, validationResult } = require('express-validator');
 
 // Display detail page for a specific comment.
 exports.comment_detail = asyncHandler(async (req, res, next) => {
-  const comment = await Comment.findById(req.params.id);
+  const comment = await Comment.findById(req.params.id).populate('post');
 
   if(comment === null) {
     const err = new Error("comment not found");
@@ -54,7 +54,7 @@ exports.comment_create_post = [
 
 // Handle comment delete on POST.
 exports.comment_delete_post = asyncHandler(async (req, res, next) => {
-  const comment = Comment.findById(req.params.id).exec();
+  const comment = await Comment.findById(req.params.id).exec();
   if(!req.user) {
     res.status(403).send("Unauthorized");
     return;
@@ -64,7 +64,7 @@ exports.comment_delete_post = asyncHandler(async (req, res, next) => {
     err.status = 404;
     return next(err);
   } else {
-    await Comment.findByIdAndDelete(req.body.commentid);
-    res.redirect("/");
+    await Comment.findByIdAndDelete(req.params.id);
+    return res.json({success: "true"});
   }
 });
