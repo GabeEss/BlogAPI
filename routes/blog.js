@@ -11,9 +11,6 @@ router.get("/", blogpost_controller.index);
 
 /// POSTER ROUTES ///
 
-// GET request for logging a poster in.
-router.get("/poster/login", blogposter_controller.poster_login_get);
-
 // POST request for logging a poster in.
 router.post("/poster/login", blogposter_controller.poster_login_post);
 
@@ -25,14 +22,8 @@ router.get("/poster/logout", blogposter_controller.poster_logout_get);
 // POST request for creating post.
 router.post("/post/create", blogpost_controller.post_create_post);
 
-// GET request to delete post.
-router.get("/post/:id/delete", blogpost_controller.post_delete_get);
-
 // POST request to delete post.
 router.post("/post/:id/delete", blogpost_controller.post_delete_post);
-
-// GET request to update post.
-router.get("/post/:id/update", blogpost_controller.post_update_get);
 
 // POST request to update post.
 router.post("/post/:id/update", blogpost_controller.post_update_post);
@@ -47,9 +38,6 @@ router.get("/posts", blogpost_controller.post_list);
 
 // POST request for creating comment.
 router.post("/post/:id/create", blogcomment_controller.comment_create_post);
-
-// GET request to delete comment.
-router.get("/comment/:id/delete", blogcomment_controller.comment_delete_get);
 
 // POST request to delete comment.
 router.post("/comment/:id/delete", blogcomment_controller.comment_delete_post);

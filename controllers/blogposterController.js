@@ -1,11 +1,6 @@
 const passport = require('passport');
 const asyncHandler = require("express-async-handler");
 
-// Display poster login form on GET.
-exports.poster_login_get = asyncHandler(async (req, res, next) => {
-  res.json({ title: "Blog Poster Login" })
-});
-
 // Handle poster login on POST.
 exports.poster_login_post = asyncHandler(async (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {

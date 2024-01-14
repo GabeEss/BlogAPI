@@ -58,6 +58,12 @@ exports.post_create_post = [
       return res.status(400).json({ success: "false", errors: errors.array() });      
     }
 
+    // Only a blog poster can edit a post.
+    if(!req.user) {
+      res.status(403).send("Unauthorized");
+      return;
+    }
+
     const post = new Post({
         title: req.body.title,
         text: req.body.text,
@@ -68,22 +74,6 @@ exports.post_create_post = [
     return res.status(201).json({ success: "true", post: savedPost });
   })
 ]
-
-// Display post delete form on GET.
-exports.post_delete_get = asyncHandler(async (req, res, next) => {
-  const post = await Post.findById(req.params.id).exec();
-
-  if(post === null) {
-    const err = new Error("Post not found.");
-    err.status = 404;
-    return next(err);
-  }
-
-  res.json({
-    title: "Delete Post",
-    post: post
-  })
-});
 
 // Handle post delete on POST.
 exports.post_delete_post = asyncHandler(async (req, res, next) => {
@@ -104,22 +94,6 @@ exports.post_delete_post = asyncHandler(async (req, res, next) => {
   }
 });
 
-// Display post update form on GET.
-exports.post_update_get = asyncHandler(async (req, res, next) => {
-  const post = await Post.findById(req.params.id).exec();
-
-  if(post === null) {
-    const err = new Error("Post not found");
-    err.status = 404;
-    return next(err);
-  }
-
-  res.json({
-    title: "Update Form",
-    post: post,
-  })
-});
-
 // Handle post update on POST.
 exports.post_update_post = [ 
   // Validate and sanitize the username field.
@@ -130,21 +104,18 @@ exports.post_update_post = [
   .withMessage("Title must be between 3-25 characters."),
   body("text")
   .trim()
-  .isLength({ min: 20, max: 200 })
+  .isLength({ min: 6, max: 200 })
   .escape()
-  .withMessage("Post must be between 20-200 characters."),
+  .withMessage("Post must be between 6-200 characters."),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      res.json({ title: "Create Post", errors: errors.array(), message: req.body })
-      return;
+      return res.status(400).json({ success: "false", errors: errors.array() });
     }
 
-    const originalPost = await Post.findById(req.params.id);
-
     // Only a blog poster can edit a post.
-    if(!originalPost || !req.user) {
+    if(!req.user) {
       res.status(403).send("Unauthorized");
       return;
     }
@@ -155,16 +126,8 @@ exports.post_update_post = [
         timestamp: new Date(),
         _id: req.params.id,
     })
-    if(!errors.isEmpty()) {
-      res.json({
-        title: "Update Form",
-        post: post,
-        errors: errors.array(),
-      })
-      return;
-    } else {
-      const updatedPost = await Post.findByIdAndUpdate(req.params.id, post, {});
-      res.redirect(updatedPost.url);
-    }
+    
+    const updatedPost = await Post.findByIdAndUpdate(req.params.id, post, {});
+    return res.status(201).json({ success: "true", post: updatedPost });
   })
 ]

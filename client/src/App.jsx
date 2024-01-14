@@ -12,7 +12,7 @@ import { ErrorProvider } from './contexts/ErrorContext';
 import LoginPage from './components/pages/read/LoginPage';
 import NewPostPage from './components/pages/create/NewPostPage';
 import NewCommentPage from './components/pages/create/NewCommentPage';
-// import EditPostPage from './components/pages/update/EditPostPage';
+import EditPostPage from './components/pages/update/EditPostPage';
 // import DeletePostPage from './components/pages/delete/DeletePostPage';
 // import DeleteCommentPage from './components/pages/delete/DeleteCommentPage';
 
@@ -35,9 +35,9 @@ function App() {
                   <Route path="/blog/poster/login" element={<LoginPage />} />
                   <Route path="/blog/post/create" element={<NewPostPage />} />
                   <Route path="/blog/post/:id/create" element={<NewCommentPage />} />
-                  {/* <Route path="/blog/post/:id/update" element={<EditPostPage />} />
-                  <Route path="/blog/post/:id/delete" element={<DeletePostPage />} />
-                  <Route path="/blog/comment/:id/delete" element={<DeleteCommentPage />} /> */}
+                  <Route path="/blog/post/:id/update" element={<EditPostPage />} />
+                  {/* <Route path="/blog/post/:id/delete" element={<DeletePostPage />} /> */}
+                  {/* <Route path="/blog/comment/:id/delete" element={<DeleteCommentPage />} /> */}
                 </Routes>
               </MainDisplay>
             </div>

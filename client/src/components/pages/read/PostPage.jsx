@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/LoginContext';
 import axios from 'axios';
 
 function PostPage() {
     const [data, setData] = useState({});
     const { id } = useParams();
+    const { loggedIn } = useContext(AuthContext);
 
     useEffect(() =>{
         axios.get(`/blog/post/${id}`)
@@ -41,6 +43,16 @@ function PostPage() {
                     </div>
                 </div>
             )}
+            <div>
+                {loggedIn ? (
+                    <div>
+                        <p><Link to={`/blog/post/${id}/update`}>Update this post...</Link></p>
+                        <p>Delete this post...</p>
+                    </div>
+                ) : (
+                    <></>
+                )}
+            </div>
         </div>
     )
 }

@@ -52,22 +52,6 @@ exports.comment_create_post = [
   })
 ]
 
-// Display comment delete form on GET.
-exports.comment_delete_get = asyncHandler(async (req, res, next) => {
-  const comment = await Comment.findById(req.params.id).exec();
-
-  if(comment === null) {
-    const err = new Error("Comment not found");
-    err.status = 404;
-    return next(err);
-  }
-
-  res.json({
-    title: "Delete Comment",
-    comment: comment,
-  })
-});
-
 // Handle comment delete on POST.
 exports.comment_delete_post = asyncHandler(async (req, res, next) => {
   const comment = Comment.findById(req.params.id).exec();
