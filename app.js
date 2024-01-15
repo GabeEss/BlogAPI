@@ -37,7 +37,7 @@ async function main() {
 const sessionSecret = process.env.SESSION_SECRET;
 
 app.use(cors({
-  origin: 'http://localhost:5173', // replace with your frontend URL
+  origin: 'https://gabe-ess-blog-api.netlify.app/', // replace with your frontend URL
   credentials: true,
 }));
 
