@@ -58,10 +58,8 @@ exports.post_create_post = [
       return res.status(400).json({ success: "false", errors: errors.array() });      
     }
 
-    // Only a blog poster can edit a post.
-    if(!req.user) {
-      res.status(403).send("Unauthorized");
-      return;
+    if (!req.user) {
+      return res.status(403).json({ success: false, errors: ["Not authenticated"], user: req.user });
     }
 
     const post = new Post({
@@ -79,12 +77,11 @@ exports.post_create_post = [
 exports.post_delete_post = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id).exec();
   const comments = await Comment.find({ post: req.params.id }, "text timestamp owner").exec();
-
-  if(!req.user) {
-    res.status(403).send("Unauthorized");
-    return;
-  }
   
+  if(!req.user) {
+    return res.status(403).json({success: false, errors: ["Not a user"]});
+  }
+
   if(post === null) {
     const err = new Error("Post not found.");
     err.status = 404;
@@ -119,10 +116,8 @@ exports.post_update_post = [
       return res.status(400).json({ success: "false", errors: errors.array() });
     }
 
-    // Only a blog poster can edit a post.
     if(!req.user) {
-      res.status(403).send("Unauthorized");
-      return;
+      return res.status(403).json({success: false, errors: ["Not a user"]});
     }
 
     const post = new Post({

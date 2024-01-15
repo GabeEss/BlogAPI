@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/LoginContext';
-import axios from 'axios';
+import custom from '../../../../axios-custom';
 
 function PostPage() {
     const [data, setData] = useState({});
@@ -9,7 +9,7 @@ function PostPage() {
     const { loggedIn } = useContext(AuthContext);
 
     useEffect(() =>{
-        axios.get(`/blog/post/${id}`)
+        custom.get(`/blog/post/${id}`)
         .then(response => {
             setData(response.data);
         })

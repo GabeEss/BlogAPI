@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import custom from '../../../../axios-custom';
 
 function HomePage() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    axios.get('/blog')
+    custom.get('/blog')
       .then(response => { 
         setData(response.data);
     })

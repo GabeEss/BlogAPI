@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import custom from '../../../../axios-custom';
 
 function NewCommentPage() {
     const [text, setText] = useState('');
@@ -14,9 +14,9 @@ function NewCommentPage() {
         const data = { text, owner };
 
         try {
-            const response = await axios.post(`/blog/post/${id}/create`, data);
+            const response = await custom.post(`/blog/post/${id}/create`, data);
             if(response.data.success) {
-                console.log("New post created");
+                console.log("New comment created");
                 navigate(`/blog/post/${id}`);
             }
         } catch (error) {

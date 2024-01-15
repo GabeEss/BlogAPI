@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import custom from '../../../../axios-custom';
 
 function EditPostPage() {
     const [title, setTitle] = useState("");
@@ -13,7 +13,7 @@ function EditPostPage() {
         event.preventDefault();
         const data = { title, text };
         try {
-            const response = await axios.post(`/blog/post/${id}/update`, data);
+            const response = await custom.post(`/blog/post/${id}/update`, data);
             if(response.data.success) {
                 console.log("Post update successful.");
                 navigate(`/blog/post/${response.data.post._id}`);

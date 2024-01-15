@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import custom from '../../axios-custom';
 import { ErrorContext } from './ErrorContext';
 
 export const AuthContext = createContext();
@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const response = await axios.get('/blog/user');
+        const response = await custom.get('/blog/user');
         setLoggedIn(response.data.user !== null);
       } catch (error) {
         console.error(error);
@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post('/blog/poster/login', { username, password });
+      const response = await custom.post('/blog/poster/login', { username, password });
       if (response.data.success) {
         setLoggedIn(true);
       } else {
@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const response = await axios.get('/blog/poster/logout');
+      const response = await custom.get('/blog/poster/logout');
       if (response.data.success) {
         setLoggedIn(false);
       } else {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import custom from '../../../../axios-custom';
 
 function DeleteCommentPage() {
     const [data, setData] = useState({});
@@ -9,7 +9,7 @@ function DeleteCommentPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`/blog/comment/${id}`)
+        custom.get(`/blog/comment/${id}`)
         .then(response => {
             setData(response.data);
         })
@@ -22,7 +22,7 @@ function DeleteCommentPage() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`/blog/comment/${id}/delete`);
+            const response = await custom.post(`/blog/comment/${id}/delete`);
             if(response.data.success) {
                 console.log('Comment deleted...');
                 navigate(`/blog/post/${data.comment.post._id}`);

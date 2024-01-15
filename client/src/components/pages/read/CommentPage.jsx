@@ -1,7 +1,7 @@
 import {useState, useEffect, useContext} from 'react';
 import {useParams, Link} from 'react-router-dom';
 import { AuthContext } from '../../../contexts/LoginContext';
-import axios from 'axios';
+import custom from '../../../../axios-custom';
 
 function CommentPage() {
     const [data, setData] = useState({});
@@ -9,7 +9,7 @@ function CommentPage() {
     const { loggedIn } = useContext(AuthContext);
 
     useEffect(() => {
-        axios.get(`/blog/comment/${id}`)
+        custom.get(`/blog/comment/${id}`)
         .then(response => {
             setData(response.data);
         })

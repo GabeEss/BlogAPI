@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import custom from '../../../../axios-custom';
 
 function PostListPage() {
     const [data, setData] = useState({});
     
     useEffect(() => {
-        axios.get('/blog/posts')
+        custom.get('/blog/posts')
         .then(response => { 
             setData(response.data);
         })

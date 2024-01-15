@@ -55,10 +55,11 @@ exports.comment_create_post = [
 // Handle comment delete on POST.
 exports.comment_delete_post = asyncHandler(async (req, res, next) => {
   const comment = await Comment.findById(req.params.id).exec();
+
   if(!req.user) {
-    res.status(403).send("Unauthorized");
-    return;
+    return res.status(403).json({success: false, errors: ["Not a user"]});
   }
+
   if(comment === null) {
     const err = new Error("Comment not found");
     err.status = 404;

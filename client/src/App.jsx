@@ -31,7 +31,7 @@ function App() {
                   <Route path="/blog/post/:id" element={<PostPage />} />
                   <Route path="/blog/comment/:id/" element={<CommentPage />} />
                   <Route path="/blog/poster/login" element={<LoginPage />} />
-                  <Route path="/blog/post/create" element={<NewPostPage />} />
+                  <Route path="/blog/post/create" element={<NewPostPage/>} />
                   <Route path="/blog/post/:id/create" element={<NewCommentPage />} />
                   <Route path="/blog/post/:id/update" element={<EditPostPage />} />
                   <Route path="/blog/post/:id/delete" element={<DeletePostPage />} />

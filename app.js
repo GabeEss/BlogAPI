@@ -36,12 +36,15 @@ async function main() {
 
 const sessionSecret = process.env.SESSION_SECRET;
 
-// Currently enabled for all routes and origins.
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // replace with your frontend URL
+  credentials: true,
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(session({
+  sameSite: 'none',
   secret: sessionSecret,
   resave: false,
   saveUninitialized: true,

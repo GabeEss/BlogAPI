@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from 'axios';
+import custom from "../../../../axios-custom";
 
 function DeletePostPage() {
     const [data, setData] = useState({});
@@ -9,7 +9,7 @@ function DeletePostPage() {
     const navigate = useNavigate();
     
     useEffect(() => {
-        axios.get(`/blog/post/${id}`)
+        custom.get(`/blog/post/${id}`)
         .then(response => { 
             setData(response.data);
         })
@@ -22,7 +22,7 @@ function DeletePostPage() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`/blog/post/${id}/delete`);
+            const response = await custom.post(`/blog/post/${id}/delete`);
             console.log(response);
             if(response.data.success) {
                 console.log("Post deleted.");

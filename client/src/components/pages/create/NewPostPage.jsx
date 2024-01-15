@@ -1,6 +1,6 @@
 import { useState, } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import custom from "../../../../axios-custom";
 
 function NewPostPage() {
     const [title, setTitle] = useState("");
@@ -12,7 +12,7 @@ function NewPostPage() {
         event.preventDefault();
         const data = { title, text };
         try {
-            const response = await axios.post("/blog/post/create", data);
+            const response = await custom.post("/blog/post/create", data);
             if(response.data.success) {
                 console.log("New post created");
                 navigate(`/blog/post/${response.data.post._id}`);
@@ -21,6 +21,7 @@ function NewPostPage() {
             console.error(`An error occurred: ${error}`);
             if (error.response && error.response.data && error.response.data.errors) {
                 setErrorDisplay(error.response.data.errors);
+                console.log(error);
             } else {
                 setErrorDisplay(error.message);
             }
